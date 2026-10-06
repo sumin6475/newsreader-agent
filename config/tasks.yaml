@@ -21,7 +21,7 @@
 
 content_harvesting_task:
   description: >
-    Collect recent news articles based on {topics}.
+    Collect recent news articles based on {topic}.
 
     Steps include:
     1. Use the serch tool to search for recent news articles about {topic}

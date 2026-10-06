@@ -4,7 +4,7 @@ dotenv.load_dotenv()
 
 from crewai.project import CrewBase, agent, task, crew
 from crewai import Crew, Agent, Task
-from tools import search_tool
+from tools import search_tool, scrape_tool
 
 
 @CrewBase
@@ -14,13 +14,14 @@ class NewsReaderAgent:
     def news_hunter_agent(self):
         return Agent(
             config=self.agents_config["news_hunter_agent"],
-            tools=[search_tool],
+            tools=[search_tool, scrape_tool],
         )
 
     @agent
     def summarizer_agent(self):
         return Agent(
-            config=self.agents_config["summarizer_agent"]
+            config=self.agents_config["summarizer_agent"],
+            tools=[scrape_tool],
         )
 
     @agent
@@ -55,4 +56,4 @@ class NewsReaderAgent:
             verbose= True
         )
 
-NewsReaderAgent().crew().kickoff()
+NewsReaderAgent().crew().kickoff(inputs={"topic": "Is CrewAI a good tool for freelance builders for next 5 years?"})
